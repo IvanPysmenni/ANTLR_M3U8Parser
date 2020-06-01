@@ -1,0 +1,17 @@
+{
+    {
+        "version": "2.0.0",
+        "configurations": [
+            {
+                "name": "Debug ANTLR4 grammar",
+                "type": "antlr-debug",
+                "request": "launch",
+                "input": "test_src/simple-playlist.m3u8",
+                "grammar": "src/grammar/playlist_parser.g4",
+                "startRule": "enter",
+                "printParseTree": true,
+                "visualParseTree": true
+            }
+        ]
+    }
+}
