@@ -22,4 +22,6 @@ set(ANTLR_EXECUTABLE ${CMAKE_SOURCE_DIR}/antlr-4.8-complete.jar)
 # add macros to generate ANTLR Cpp code from grammar
 find_package(ANTLR REQUIRED)
 
+include_directories("${CMAKE_SOURCE_DIR}/third_party/nlohmann_json")
+
 add_subdirectory(src)

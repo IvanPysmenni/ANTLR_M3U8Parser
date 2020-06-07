@@ -3,8 +3,10 @@
 This is test project for learning how ot use ANTLR parser generator
 
 ## Build steps:
-Go to build folder
 ```
+mkdir bin
+mkdir build
+cd build
 cmake ..
 make
 ```

@@ -5,11 +5,14 @@
 #include "antlr4-runtime.h"
 #include "playlist_lexer.h"
 #include "playlist_parser.h"
+#include "json_writer/json_writer.h"
 
 using namespace playlistParser;
 using namespace antlr4;
 
 int main(int , const char **) {
+
+    JSONWriter jsonWriter;
 
     std::ifstream playlistFile("../test_src/simple-playlist.m3u8", std::wifstream::in);
     std::stringstream playlistStream;
