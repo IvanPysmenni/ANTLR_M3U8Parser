@@ -8,12 +8,12 @@ options {
 
 enter: ENTER_LABEL NEWLINE extention_info+;
 
-extention_info: EXTINFO_LABEL COLON duration COMMA actor_track_full_name WHITE_SPACE DASH WHITE_SPACE actor_track_full_name NEWLINE path_to_track NEWLINE*;
+extention_info: EXTINFO_LABEL COLON duration COMMA actor_name WHITE_SPACE DASH WHITE_SPACE track_name NEWLINE path_to_track NEWLINE*;
 
 duration: WHITE_SPACE* DIGIT+;
 
-actor_track_full_name: actor_track_name ((DASH | WHITE_SPACE) actor_track_name)*;
+actor_name: WHITE_SPACE* (LETTER | DIGIT | SPECIAL_SYMBOL | POINT | DASH)+;
 
-actor_track_name: WHITE_SPACE* (LETTER | DIGIT | SPECIAL_SYMBOL | POINT)+;
+track_name: WHITE_SPACE* (LETTER | DIGIT | SPECIAL_SYMBOL | POINT | DASH)+;
 
 path_to_track: ~HASHTAG (LETTER | DIGIT | SPECIAL_SYMBOL | COLON | COMMA | WHITE_SPACE | DASH | POINT)+;

@@ -2,6 +2,10 @@
 #include <exception>
 
 #include "json.hpp"
+
+#include "playlist_parser.h"
+#include "playlist_lexer.h"
+
 #include "json_writer.h"
 
 using json = nlohmann::json;

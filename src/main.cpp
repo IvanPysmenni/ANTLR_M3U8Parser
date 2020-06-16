@@ -1,11 +1,13 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <memory>
 
 #include "antlr4-runtime.h"
 #include "playlist_lexer.h"
 #include "playlist_parser.h"
 #include "json_writer/json_writer.h"
+#include "listener/playlist_listener.h"
 
 using namespace playlistParser;
 using namespace antlr4;
@@ -22,17 +24,10 @@ int main(int , const char **) {
     ANTLRInputStream input(playlistText);
     playlist_lexer lexer(&input);
     CommonTokenStream tokens(&lexer);
-
-    tokens.fill();
-    for (auto token : tokens.getTokens()) 
-    {
-        std::cout << token->toString() << std::endl;
-    }
-
     playlist_parser parser(&tokens);
     tree::ParseTree* tree = parser.enter();
-
-    std::cout << tree->toStringTree(&parser) << std::endl << std::endl;
+    std::unique_ptr<playlistListener> plListener(new playlistListener());
+    tree::ParseTreeWalker::DEFAULT.walk(plListener.get(), tree);
 
     return 0;
 }
