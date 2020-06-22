@@ -1,8 +1,17 @@
+#ifndef PLAYLIST_LISTENER_H_
+    #define PLAYLIST_LISTENER_H_
+
+#include <memory>
+
 #include "../generated/parser/playlist_parserBaseListener.h"
+
+class JSONWriter;
 
 class playlistListener : public playlistParser::playlist_parserBaseListener
 {
 public:
+
+    playlistListener(JSONWriter* jsonWriter);
 
     void enterEnter(playlistParser::playlist_parser::EnterContext* ctx) override;
     void exitEnter(playlistParser::playlist_parser::EnterContext* ctx) override;
@@ -22,8 +31,9 @@ public:
     void enterPath_to_track(playlistParser::playlist_parser::Path_to_trackContext * /*ctx*/) override;
     void exitPath_to_track(playlistParser::playlist_parser::Path_to_trackContext * /*ctx*/) override;
 
-    //void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override;
-    //void exitEveryRule(antlr4::ParserRuleContext * /*ctx*/) override;
-    //void visitTerminal(antlr4::tree::TerminalNode * /*node*/) override;
-    //void visitErrorNode(antlr4::tree::ErrorNode * /*node*/) override;
+private:
+
+    std::unique_ptr<JSONWriter> m_jsonWriter;
 };
+
+#endif // PLAYLIST_LISTENER_H_

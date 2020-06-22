@@ -20,6 +20,7 @@ include_directories(${ANTLR_PlaylistParser_OUTPUT_DIR})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/json_writer)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/listener)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/third_party/nlohmann_json_3_8)
 
 # add generated grammar to demo binary target
 add_executable(PlaylistParser main.cpp
@@ -29,4 +30,4 @@ add_executable(PlaylistParser main.cpp
                ${CMAKE_CURRENT_SOURCE_DIR}/listener/playlist_listener.cpp)
                
 set_target_properties(PlaylistParser PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
-target_link_libraries(PlaylistParser antlr4_static)
+target_link_libraries(PlaylistParser PRIVATE antlr4_static)

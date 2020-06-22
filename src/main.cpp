@@ -14,8 +14,6 @@ using namespace antlr4;
 
 int main(int , const char **) {
 
-    JSONWriter jsonWriter;
-
     std::ifstream playlistFile("../test_src/simple-playlist.m3u8", std::wifstream::in);
     std::stringstream playlistStream;
     playlistStream << playlistFile.rdbuf();
@@ -26,7 +24,7 @@ int main(int , const char **) {
     CommonTokenStream tokens(&lexer);
     playlist_parser parser(&tokens);
     tree::ParseTree* tree = parser.enter();
-    std::unique_ptr<playlistListener> plListener(new playlistListener());
+    std::unique_ptr<playlistListener> plListener(new playlistListener(new JSONWriter("simple-playlist.json")));
     tree::ParseTreeWalker::DEFAULT.walk(plListener.get(), tree);
 
     return 0;
