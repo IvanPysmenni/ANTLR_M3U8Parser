@@ -1,6 +1,6 @@
 # ANTLR_M3U8Parser
 
-This is test project for learning how ot use ANTLR parser generator
+This is test project for learning how ot use ANTLR parser generator for convert m3u8 file to json
 
 ## Build steps:
 ```
