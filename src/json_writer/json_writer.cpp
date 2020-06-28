@@ -81,7 +81,6 @@ void JSONWriter::writeRow(std::string key, std::string value)
 {
     if(m_json)
     {
-        std::cout << "writeRow inside if" << std::endl;
         auto& lastObject = m_json->back();
         lastObject[key] = value; 
     }

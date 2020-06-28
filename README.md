@@ -2,13 +2,21 @@
 
 This is test project for learning how ot use ANTLR parser generator for convert m3u8 file to json
 
-## Build steps:
+## Build on local machine:
 ```
-mkdir bin
-mkdir build
-cd build
-cmake ..
-make
+./build.sh
+```
+
+## Using docker:
+
+### Build and run in docker:
+```
+./docker-run.sh
+```
+
+### Only run in docker:
+```
+./docker-run.sh run-only
 ```
 
 NOTE: Java should be installed

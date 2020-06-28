@@ -12,9 +12,35 @@
 using namespace playlistParser;
 using namespace antlr4;
 
-int main(int , const char **) {
+int main(int argc, const char **argv) {
 
-    std::ifstream playlistFile("../test_src/simple-playlist.m3u8", std::wifstream::in);
+    if((argc-1) != 4)
+    {
+        std::cout << "Error: wrong number of arguments. Current number is " << std::to_string(argc) << ", expected 4" << std::endl;
+        return 1;
+    }
+
+    std::string pathToSourceFile;
+    std::string pathToDestinationFile;
+    for(size_t i = 1; i < argc; ++i)
+    {
+        std::string parameter(argv[i]);
+        if(parameter == "-s")
+        {
+            ++i;
+            pathToSourceFile = argv[i];
+        }
+        else if(parameter == "-d")
+        {
+            ++i;
+            pathToDestinationFile=argv[i];
+        }
+    }
+
+    std::cout << "Source file: " << pathToSourceFile << std::endl;
+    std::cout << "Destination file: " << pathToDestinationFile << std::endl;
+
+    std::ifstream playlistFile(pathToSourceFile, std::wifstream::in);
     std::stringstream playlistStream;
     playlistStream << playlistFile.rdbuf();
     std::string playlistText(playlistStream.str());
@@ -24,8 +50,7 @@ int main(int , const char **) {
     CommonTokenStream tokens(&lexer);
     playlist_parser parser(&tokens);
     tree::ParseTree* tree = parser.enter();
-    std::unique_ptr<playlistListener> plListener(new playlistListener(new JSONWriter("simple-playlist.json")));
+    std::unique_ptr<playlistListener> plListener(new playlistListener(new JSONWriter(pathToDestinationFile)));
     tree::ParseTreeWalker::DEFAULT.walk(plListener.get(), tree);
-
     return 0;
 }
