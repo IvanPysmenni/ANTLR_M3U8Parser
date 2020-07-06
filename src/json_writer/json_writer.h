@@ -31,7 +31,7 @@ private:
     std::string m_path;
 
     // Get error when tried to use unique_ptr. Problem with object size. Need additional investigation in future.
-    nlohmann::json* m_json;
+    nlohmann::json* m_json = nullptr;
 
     // FLAGS
     bool m_needNewObject = true;

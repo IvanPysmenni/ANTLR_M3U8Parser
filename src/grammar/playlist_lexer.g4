@@ -4,7 +4,7 @@ ENTER_LABEL: HASHTAG 'EXTM3U';
 
 EXTINFO_LABEL: HASHTAG 'EXTINF';
 
-LETTER: [a-zA-Z];
+LETTER: [a-zA-Z\u0080-\u{10FFFF}];
 
 NEWLINE: ('\r'? '\n' | '\r')+;
 

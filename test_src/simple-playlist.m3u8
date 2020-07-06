@@ -5,3 +5,15 @@
 
 #EXTINF:321, ArtistName2 - TrackName2
 ./tmp/TrackName2.mp3
+
+#EXTINF:321, ИмяАртиста3 - ИмяТрека3
+./tmp/ИмяТрека3.mp3
+
+#EXTINF:321, Künstlername3 - Titelname3
+./tmp/Titelname3.mp3
+
+#EXTINF:321, कलाकारकानाम3 - ट्रैककानाम3
+./tmp/ट्रैककानाम3.mp3
+
+#EXTINF:321, アーティスト名3 - トラック名3
+./tmp/トラック名3.mp3

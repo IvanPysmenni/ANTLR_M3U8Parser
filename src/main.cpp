@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <memory>
+#include <codecvt>
 
 #include "antlr4-runtime.h"
 #include "playlist_lexer.h"
@@ -14,14 +15,14 @@ using namespace antlr4;
 
 int main(int argc, const char **argv) {
 
-    if((argc-1) != 4)
+    if((argc-1) % 2)
     {
-        std::cout << "Error: wrong number of arguments. Current number is " << std::to_string(argc) << ", expected 4" << std::endl;
+        std::cout << "Error: wrong number of arguments. Current number is " << std::to_string(argc) << ", expected 2 or 4" << std::endl;
         return 1;
     }
 
     std::string pathToSourceFile;
-    std::string pathToDestinationFile;
+    std::string pathToDestinationFile = "default_playlist.json";
     for(size_t i = 1; i < argc; ++i)
     {
         std::string parameter(argv[i]);
@@ -40,12 +41,13 @@ int main(int argc, const char **argv) {
     std::cout << "Source file: " << pathToSourceFile << std::endl;
     std::cout << "Destination file: " << pathToDestinationFile << std::endl;
 
-    std::ifstream playlistFile(pathToSourceFile, std::wifstream::in);
-    std::stringstream playlistStream;
+    std::wifstream playlistFile(pathToSourceFile, std::wifstream::in);
+    std::wstringstream playlistStream;
+    playlistFile.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
     playlistStream << playlistFile.rdbuf();
-    std::string playlistText(playlistStream.str());
+    std::wstring playlistText(playlistStream.str());
 
-    ANTLRInputStream input(playlistText);
+    ANTLRInputStream input(antlrcpp::ws2s(playlistText));
     playlist_lexer lexer(&input);
     CommonTokenStream tokens(&lexer);
     playlist_parser parser(&tokens);

@@ -20,7 +20,10 @@ JSONWriter::JSONWriter(const std::string& inPath)
 
 JSONWriter::~JSONWriter()
 {
-    delete m_json;
+    if(m_json)
+    {
+        delete m_json;
+    }
 }
 
 void JSONWriter::SetPath(const std::string& inPath)
@@ -61,6 +64,7 @@ void JSONWriter::writeEnd()
     }
 
     delete m_json;
+    m_json = nullptr;
 }
 
 void JSONWriter::writeStartObject()
